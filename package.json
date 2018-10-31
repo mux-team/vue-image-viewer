@@ -1,0 +1,49 @@
+{
+  "name": "imageview",
+  "version": "1.0.0",
+  "description": "移动端图片浏览放大器",
+  "main": "dist/vue-image-viewer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.babel.js --devtool eval --progress --inline --colors --content-base dist",
+    "build": "NODE_ENV=production webpack --config webpack.config.js -p --progress --hide-modules"
+  },
+  "files": [
+    "dist/vue-infinite-loading.js",
+    "src"
+  ],
+  "homepage": "https://github.com/mux-team/imageViewer",
+  "author": "lixiaoqing",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.2",
+    "html-minifier": "^3.5.3",
+    "html-webpack-harddisk-plugin": "^0.1.0",
+    "html-webpack-plugin": "^2.30.1",
+    "optimize-css-assets-webpack-plugin": "^3.1.1",
+    "style-loader": "^0.18.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-loader": "^13.0.4",
+    "vue-template-compiler": "^2.4.2",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.3",
+    "url-loader": "^1.1.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "eslint": "^5.8.0",
+    "fastclick": "^1.0.6",
+    "nib": "^1.1.2",
+    "vue": "^2.4.2",
+    "web-animations-js": "^2.3.1"
+  }
+}
