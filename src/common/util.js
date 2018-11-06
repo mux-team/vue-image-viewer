@@ -1,9 +1,3 @@
-/**
- * @file 工具函数
- * @author rongweiwei@baidu.com
- */
-
-
 // 浏览器类型检查
 const isIos = /(iPhone|iPod|iPad)/i.test(navigator.userAgent);
 const isBaidu = /baiduboxapp/i.test(navigator.userAgent);

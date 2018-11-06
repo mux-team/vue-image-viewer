@@ -11,7 +11,7 @@
             }"
             class="image-viewer-img-loading"
         >
-            <loading
+            <image-viewer-loading
                 type="2"
                 text-logo-style="dark"
                 class="image-viewer-img-loading-content"
@@ -115,11 +115,11 @@
 import AnimateConfig from '../common/animate-config.js';
 import {scaleImage, layoutImage, cssAnimate, flip} from '../common/animate.js';
 import util from '../common/util.js';
-import Loading from './Loading';
+import ImageViewerLoading from './ImageViewerLoading';
 
 export default {
     components: {
-        Loading
+        ImageViewerLoading
     },
     props: {
         isCurrent: {

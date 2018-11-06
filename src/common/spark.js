@@ -1,10 +1,3 @@
-/**
- * @fileOverview: naboo framework core code
- * @author: zhulei05
- * @email: zhulei05@baidu.com
- * @version 1.0
- * @copyright 2015 Baidu.com, Inc. All Rights Reserved
- */
 /* eslint-disable */
 (function (window, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -23,13 +16,6 @@
     Spark.dispose = function () {
         Spark.disposed = true;
     };
-
-    // css3动画
-    /**
- * @fileOverview 工具集之css3动画（animation + transition）
- * @author: zhulei05
- * @email: zhulei05@baidu.com
- */
 
 (function () {
     // 定义一批检测浏览器特性需要的变量
@@ -311,13 +297,6 @@
     };
 })();
 ;
-
-    // js动画
-    /**
- * @fileOverview 工具集之js动画（setTimeout or requestAnimationFrame）
- * @author: zhulei05
- * @email: zhulei05@baidu.com
- */
 
 (function () {
 

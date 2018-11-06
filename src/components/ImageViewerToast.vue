@@ -1,5 +1,5 @@
 <template>
-    <toast-popup
+    <image-viewer-toast-popup
         :state="oState"
         :has-mask="false"
         @change="changeState"
@@ -7,12 +7,11 @@
         <div class="toast-content">
             {{content}}
         </div>
-    </toast-popup>
+    </image-viewer-toast-popup>
 </template>
 
 <script>
-import ToastPopup from './ToastPopup';
-
+import ImageViewerToastPopup from './ImageViewerToastPopup';
 export default {
     name: 'toast',
     props: {
@@ -40,7 +39,7 @@ export default {
         }
     },
     components: {
-        ToastPopup
+        ImageViewerToastPopup
     },
     methods: {
         changeState(value) {

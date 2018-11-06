@@ -1,7 +1,3 @@
-/**
- * @file 动画参数配置
- * @author rongweiwei@baidu.com
- */
 import Spark from './spark';
 
 // transition 时间曲线

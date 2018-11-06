@@ -1,8 +1,3 @@
-/**
- * @file 封装touch操作
- * @author rongweiwei@baidu.com
- */
-
 import util from './util.js';
 
 class Point {

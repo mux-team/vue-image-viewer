@@ -1,8 +1,3 @@
-/**
- * @file 动画函数
- * @author rongweiwei@baidu.com
- */
-
 // 部分代码参考图搜
 
 import Spark from './spark';

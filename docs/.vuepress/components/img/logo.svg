@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495 350">
+    <title>logo</title>
+    <path d="M165,0H330V191l-82,76-83-84Z" style="fill:#6599f6;fill-rule:evenodd"/>
+    <path d="M0,162.93H165V350H0Z" style="fill-rule:evenodd"/>
+    <path d="M248,245l82.19-81.88,34,33.55L247.5,311.89,130.83,196.67l34.35-33.92Z" style="fill-rule:evenodd"/>
+    <path d="M330,0H495V162.93H330Z" style="fill:#a6e5ff;fill-rule:evenodd"/>
+    <path d="M0,0H165V162.93H0Z" style="fill:#1a70fe;fill-rule:evenodd"/>
+    <path d="M330,162.93H495V350H330Z" style="fill-rule:evenodd"/>
+    <path d="M0,0,82.5,81.47,165,162.93H0Z" style="fill-rule:evenodd"/>
+    <path d="M330,162.93l82.5-81.46L495,0V162.93Z" style="fill-rule:evenodd"/>
+</svg>

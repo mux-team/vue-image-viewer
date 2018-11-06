@@ -1,8 +1,3 @@
-/**
- * @file 统一状态管理
- * @author rongweiwei@baidu.com
- */
-
 class Store {
     constructor() {
         this.state = {};

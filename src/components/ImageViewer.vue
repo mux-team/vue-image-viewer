@@ -101,7 +101,7 @@
         </div>
 
         <!-- 提示 -->
-        <toast
+        <image-viewer-toast
             :state="toast.state"
             :content="toast.msg"
             :duration="1500"
@@ -116,7 +116,7 @@ import fastclick from 'fastclick';
 import ImageViewerContent from './ImageViewerContent';
 import ImageViewerClose from './ImageViewerClose';
 import ImageViewerInfo from './ImageViewerInfo';
-import Toast from './Toast';
+import ImageViewerToast from './ImageViewerToast';
 import AnimateConfig from '../common/animate-config.js';
 import {cssAnimate} from '../common/animate.js';
 import util from '../common/util.js';
@@ -124,11 +124,12 @@ import Store from '../common/store.js';
 import Link from '../common/link.js';
 
 export default {
+    name: 'imageViewer',
     components: {
         ImageViewerContent,
         ImageViewerClose,
         ImageViewerInfo,
-        Toast
+        ImageViewerToast
     },
     props: {
         list: {

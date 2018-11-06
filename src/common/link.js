@@ -1,8 +1,3 @@
-/**
- * @file 图片拉链和图集数据管理
- * @author rongweiwei@baidu.com
- */
-
 class LinkStore {
     constructor(list) {
         this.link = [];
