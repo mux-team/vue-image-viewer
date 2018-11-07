@@ -1,74 +1,54 @@
+# 缩略图裁剪
+
+## 体验二维码
+
+## 介绍
+缩略图，点击图片从缩略图展开
+
+## 代码
+
+### 模板
+```html
 <template>
     <div class="example-container">
-        <h1>全屏后上滑出现第二屏</h1>
+        <h1>缩略图裁剪</h1>
         <div class="img-container">
-            <div class="img-left">
-                <div class="img-wrapper" @click="onImgClick(0)">
-                    <img :src="list[0].src">
+            <span v-for="(item, i) in list" :key="i">
+                <div class="img-wrapper" @click="onImgClick(i)">
+                    <div class="img-load"
+                        :style="{
+                            'background-image': 'url(' + item.src + ')'
+                        }"
+                    />
                 </div>
-                <div class="img-wrapper" @click="onImgClick(1)">
-                    <img :src="list[1].src">
-                </div>
-            </div>
-            <div class="img-right">
-                <div class="img-wrapper" @click="onImgClick(2)">
-                    <img :src="list[2].src">
-                </div>
-                <div class="img-wrapper c-gap-top" @click="onImgClick(3)">
-                    <img :src="list[3].src">
-                </div>
-            </div>
+            </span>
         </div>
         <image-viewer
             v-if="showViewer"
             ref="viewer"
             :list="list"
             :startIndex="showIndex"
-            :hideInfo="hideInfo"
-            :hideToolbar="hideToolbar"
+            :hideInfo="false"
+            :hideToolbar="true"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"
             @switch="onViewerSwitch"
-            @secondscreenshow="onSecondScreenShow"
-            @secondscreenhide="onSecondScreenHide"
         >
-            <!-- 自定义工具栏 -->
-            <template slot="toolbar">
-                <div style="position: absolute; bottom: 0; width: 100%; height: .42rem;">
-                    <p style="margin: 0;position: absolute; right:17px; bottom:9px; line-height: 24px; font-size: 14px;" @click="onClick">
-                        查看详情
-                    </p>
-                </div>
-            </template>
-
-            <!-- 自定义第二屏 -->
-            <template slot="secondScreen">
-                <div
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片1
-                </div>
-                <div
-                    class="c-gap-top"
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片2
-                </div>
-                <div
-                    class="c-gap-top"
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片3
-                </div>
-            </template>
         </image-viewer>
     </div>
 </template>
+```
+### 配置数据和回调函数
+
+```js
 <script>
 import ImageViewer from 'components/ImageViewer';
 
 export default {
+    components: {
+        ImageViewer
+    },
     data() {
         return {
             list: [
@@ -89,22 +69,11 @@ export default {
                     width: 900,
                     height: 600,
                     desc: "2005年因在金庸剧《神雕侠侣》中饰演小龙女受到广泛关注。2006年发行首张音乐专辑《刘亦菲》；"
-                },
-                {
-                    src: "http://img2.dzwww.com:8888/tupian/20171228/2017122808392ad32000858cb9.jpg",
-                    width: 900,
-                    height: 1200,
-                    desc: "2008年起转战影坛，并凭借好莱坞电影《功夫之王》成为首位荣登IMDB电影新人排行榜榜首的亚洲女星 [9-10]  。2009年在“80后新生代娱乐大明星”评选活动中获封“四小花旦”之一 [11]  。"
                 }
             ],
-            showIndex: 0,
             showViewer: false,
-            hideInfo: true,
-            hideToolbar: true
+            showIndex: 0,
         }
-    },
-    components: {
-        ImageViewer
     },
     methods: {
         onImgClick(i) {
@@ -132,26 +101,37 @@ export default {
             this.showViewer = false;
         },
         onViewerSwitch(obj) {
-        },
-        onSecondScreenShow(data) {
-            console.log('second screen show', data);
-        },
-        onSecondScreenHide(data) {
-            console.log('second screen hide', data);
-        },
-        onClick() {
-            this.$refs.viewer.showSecondScreen();
-        },
-        onChangeInfo() {
-            this.hideInfo = !this.hideInfo;
-        },
-        onChangePageNum() {
-            this.hidePageNum = !this.hidePageNum;
+            // 翻页逻辑
         }
     }
 }
 </script>
-
+```
+### 样式
+``` stylus
 <style lang="stylus" scoped>
-@import "./css/demo.styl";
+.example-container
+    padding 10px
+
+    h1
+        font-size 16px
+        margin-bottom 10px
+
+.img-container
+    display flex
+
+    span
+        flex 1
+
+    .img-wrapper
+        padding-bottom 100%
+        position relative
+
+        .img-load
+            position absolute
+            width 100%
+            height 100%
+            background-position top center
+            background-size cover
 </style>
+```

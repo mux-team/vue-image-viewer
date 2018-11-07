@@ -1,26 +1,30 @@
+---
+previewLink: //jsfiddle.net/PeachScript/94kL0bvs/embedded/result/
+---
+
 # 使用示例
 
-## 示例1：图片全屏
+## 图片全屏
 ```
 
 
 ```
 
-## 示例2：上划出现更多
+## 上划出现更多
 
 ```
-npm install mux-image-viewer
+npm install mux-vue-image-viewer
 ```
 
-## 示例3：长图
+## 长图
 
 ```
-npm install mux-image-viewer
+npm install mux-vue-image-viewer
 ```
 
-## 示例3：截图
+## 截图
 
 ```
-npm install mux-image-viewer
+npm install mux-vue-image-viewer
 ```
 

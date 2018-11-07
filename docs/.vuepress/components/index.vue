@@ -2,7 +2,7 @@
     <div id="index">
         <div class="main">
             <div class="example">
-                <img src="./img/example.gif">
+                <!-- <img src="./img/example.gif"> -->
             </div>
             <div class="desc">
                 <h1>vue-image-viewer</h1>
@@ -10,7 +10,7 @@
                 <p>一款基于 Vue.js 的移动图片放大浏览器</p>
                 <div class="opt-wrapper">
                     <router-link :to="{path: '/guide/'}" class="card-btn">开始</router-link>
-                    <a href="https://github.com/mux-team/mux-solution" class="card-btn white">github</a>
+                    <a href="https://github.com/mux-team/vue-image-viewer" class="card-btn white">github</a>
                 </div>
             </div>
         </div>

@@ -13,6 +13,8 @@
 | hideToolbar       | 隐藏功能区  |Boolean|false|否|
 | hidePageNum       | 隐藏沉浸态的页码  |Boolean|false|否|
 | isSwipeFirstLeave | 左滑第一张图是否退场  |Boolean|false|否|
+| easySwipe         | 滑动部分不会退  |Boolean|false|否|
+| swipeDuration     | 左右切换图片时间   |Number|350|否|
 
 ### 其中 list 数组里对象的详细字段：
 
@@ -89,7 +91,7 @@
 | swipefirst        | 左滑第一张图  |
 
 ### enterstart 事件附带参数示例：
-```
+``` js
 params[0] = {
     index: 0,   // 当前展示图片序号
     setIndex: 0   // 套图内序号，一般为0
@@ -103,7 +105,7 @@ param[1] = function animate(el) {};
 ```
 
 ### enter 事件附带参数示例：
-```
+```js
 params[0] = {
     index: 0,   // 当前展示图片序号
     setIndex: 0,   // 套图内序号，一般为0
@@ -135,7 +137,7 @@ params[0] = {
 ```
 
 ### leavestart 事件附带参数示例：
-```
+```js
 params[0] = {
     index: 0,   // 当前展示图片序号
     setIndex: 0,   // 套图内序号，一般为0
@@ -150,7 +152,7 @@ param[1] = function animate(elOrRect) {};
 ```
 
 ### leave 事件附带参数示例：
-```
+```js
 params[0] = {
     index: 0,   // 当前展示图片序号
     setIndex: 0,   // 套图内序号，一般为0
@@ -159,7 +161,7 @@ params[0] = {
 ```
 
 ### switch 事件附带参数示例：
-```
+```js
 params[0] = {
     dir: -1, // 方向：-1为往前翻页，1为往后翻页
     index: 0,   // 当前图片序号
@@ -192,7 +194,7 @@ params[0] = {
 ```
 
 ### imgclick 事件附带参数示例：
-```
+```js
 params[0] = {
     status: true, // true为进入沉浸态，false为退出沉浸态
     index: 0,   // 当前图片序号
@@ -207,7 +209,7 @@ params[0] = {
 ```
 
 ### secondscreenshow 事件附带参数示例：
-```
+```js
 params[0] = {
     index: 0,   // 当前图片序号
     setIndex: 0,   // 套图内序号，一般为0
@@ -221,7 +223,7 @@ params[0] = {
 ```
 
 ### secondscreenhide 事件附带参数示例：
-```
+```js
 params[0] = {
     index: 0,   // 当前图片序号
     setIndex: 0,   // 套图内序号，一般为0

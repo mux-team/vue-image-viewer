@@ -1,6 +1,6 @@
 <template>
     <div class="example-container">
-        <h1>全屏后上滑出现第二屏</h1>
+        <h1>自定义切换时间</h1>
         <div class="img-container">
             <div class="img-left">
                 <div class="img-wrapper" @click="onImgClick(0)">
@@ -21,47 +21,19 @@
         </div>
         <image-viewer
             v-if="showViewer"
-            ref="viewer"
             :list="list"
             :startIndex="showIndex"
-            :hideInfo="hideInfo"
-            :hideToolbar="hideToolbar"
+            :isSwipeFirstLeave="false"
+            :easySwipe="easySwipe"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"
             @switch="onViewerSwitch"
-            @secondscreenshow="onSecondScreenShow"
-            @secondscreenhide="onSecondScreenHide"
         >
-            <!-- 自定义工具栏 -->
             <template slot="toolbar">
-                <div style="position: absolute; bottom: 0; width: 100%; height: .42rem;">
-                    <p style="margin: 0;position: absolute; right:17px; bottom:9px; line-height: 24px; font-size: 14px;" @click="onClick">
-                        查看详情
-                    </p>
-                </div>
+                <p style="position: relative; width: 100%; text-align: center; line-height: .42rem;">自定义工具栏</p>
             </template>
 
-            <!-- 自定义第二屏 -->
-            <template slot="secondScreen">
-                <div
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片1
-                </div>
-                <div
-                    class="c-gap-top"
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片2
-                </div>
-                <div
-                    class="c-gap-top"
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片3
-                </div>
-            </template>
         </image-viewer>
     </div>
 </template>
@@ -69,6 +41,9 @@
 import ImageViewer from 'components/ImageViewer';
 
 export default {
+    components: {
+        ImageViewer
+    },
     data() {
         return {
             list: [
@@ -99,12 +74,9 @@ export default {
             ],
             showIndex: 0,
             showViewer: false,
-            hideInfo: true,
-            hideToolbar: true
+            swipeDuration: 200,
+            easySwipe: false
         }
-    },
-    components: {
-        ImageViewer
     },
     methods: {
         onImgClick(i) {
@@ -132,21 +104,7 @@ export default {
             this.showViewer = false;
         },
         onViewerSwitch(obj) {
-        },
-        onSecondScreenShow(data) {
-            console.log('second screen show', data);
-        },
-        onSecondScreenHide(data) {
-            console.log('second screen hide', data);
-        },
-        onClick() {
-            this.$refs.viewer.showSecondScreen();
-        },
-        onChangeInfo() {
-            this.hideInfo = !this.hideInfo;
-        },
-        onChangePageNum() {
-            this.hidePageNum = !this.hidePageNum;
+            // 翻页逻辑
         }
     }
 }

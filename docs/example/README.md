@@ -1,6 +1,20 @@
+# 全屏展示
+
+## 体验二维码
+
+
+## 介绍
+- 通过配置`data`里的`list`数据绑定图片信息来实现点击从图片区域展开大图，并且左右滑动可按照顺序来切换图片
+- 用户可以配置`slot`为`toolbar`的元素来自定义工具栏
+- 通过`beforeViewerEnter` 与`beforeViewerLeave` 回调函数来指定展开收回的图片位置
+
+## 代码
+
+### 模板
+```html
 <template>
     <div class="example-container">
-        <h1>全屏后上滑出现第二屏</h1>
+        <h1>全屏展示</h1>
         <div class="img-container">
             <div class="img-left">
                 <div class="img-wrapper" @click="onImgClick(0)">
@@ -24,8 +38,6 @@
             ref="viewer"
             :list="list"
             :startIndex="showIndex"
-            :hideInfo="hideInfo"
-            :hideToolbar="hideToolbar"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"
@@ -41,34 +53,21 @@
                     </p>
                 </div>
             </template>
-
-            <!-- 自定义第二屏 -->
-            <template slot="secondScreen">
-                <div
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片1
-                </div>
-                <div
-                    class="c-gap-top"
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片2
-                </div>
-                <div
-                    class="c-gap-top"
-                    style="height: 300px; background-color: #fff;"
-                >
-                卡片3
-                </div>
-            </template>
         </image-viewer>
     </div>
 </template>
+
+```
+### 配置数据和回调函数
+
+```js
 <script>
 import ImageViewer from 'components/ImageViewer';
 
 export default {
+    components: {
+        ImageViewer
+    },
     data() {
         return {
             list: [
@@ -98,13 +97,8 @@ export default {
                 }
             ],
             showIndex: 0,
-            showViewer: false,
-            hideInfo: true,
-            hideToolbar: true
+            showViewer: false
         }
-    },
-    components: {
-        ImageViewer
     },
     methods: {
         onImgClick(i) {
@@ -132,26 +126,37 @@ export default {
             this.showViewer = false;
         },
         onViewerSwitch(obj) {
-        },
-        onSecondScreenShow(data) {
-            console.log('second screen show', data);
-        },
-        onSecondScreenHide(data) {
-            console.log('second screen hide', data);
-        },
-        onClick() {
-            this.$refs.viewer.showSecondScreen();
-        },
-        onChangeInfo() {
-            this.hideInfo = !this.hideInfo;
-        },
-        onChangePageNum() {
-            this.hidePageNum = !this.hidePageNum;
         }
     }
 }
 </script>
-
+```
+### 样式
+``` stylus
 <style lang="stylus" scoped>
-@import "./css/demo.styl";
+.example-container
+    padding 10px
+
+    h1
+        font-size 16px
+        margin-bottom 10px
+
+.img-container
+    display flex
+
+    .img-wrapper
+        margin-bottom 8px
+
+    .img-left
+        width 49%
+        margin-right 8px
+
+    .img-right
+        flex 1
+
+.img-wrapper
+    img
+        display block
+        width 100%
 </style>
+```

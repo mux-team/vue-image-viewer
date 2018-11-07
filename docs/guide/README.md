@@ -5,7 +5,7 @@
 ### NPM
 推荐使用这种方式引入组件
 ```sh
-npm install mux-image-viewer
+npm install mux-vue-image-viewer
 ```
 
 ### CDN
@@ -20,7 +20,7 @@ npm install mux-image-viewer
 ## useage
 
 ```
-import imageViewer from 'mux-image-viewer';
+import imageViewer from 'mux-vue-image-viewer';
 
 ```
 
