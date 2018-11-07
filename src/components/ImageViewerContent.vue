@@ -80,6 +80,7 @@ const MIN_HORIZONAL_DISTANCE = 30;
 const MIN_VERTICAL_DISTANCE = 10;
 const MIN_VERTICAL_DISTANCE2 = 123;
 const MIN_SWIPE_UP_DISTANCE = 10;
+const SWIPE_TIME = AnimateConfig.duration.swipe;
 
 const IS_BAIDU_APP = util.browser.isBaidu;
 
@@ -429,7 +430,7 @@ export default {
             if (this.isSwipeLast) {
                 this.dir = 0;
             }
-            else if ((timeDiff <= 380 || this.easySwipe) && distance > MIN_HORIZONAL_DISTANCE) {
+            else if ((timeDiff <= SWIPE_TIME || this.easySwipe) && distance > MIN_HORIZONAL_DISTANCE) {
                 if (this.moveX > 0) {
                     this.dir = -1;
                 }
@@ -437,7 +438,7 @@ export default {
                     this.dir = 1;
                 }
             }
-            else if (timeDiff > 380 && distance > (this.innerWidth + ITEM_BORDER_WIDTH) / 2) {
+            else if (timeDiff > SWIPE_TIME && distance > (this.innerWidth + ITEM_BORDER_WIDTH) / 2) {
                 if (this.moveX > 0) {
                     this.dir = -1;
                 }
@@ -549,8 +550,8 @@ export default {
             let timeDiff = (new Date()).getTime() - this.startT;
 
             // 退场
-            if (timeDiff <= 380 && this.moveY >= MIN_VERTICAL_DISTANCE
-                || timeDiff > 380 && this.moveY >= MIN_VERTICAL_DISTANCE2) {
+            if (timeDiff <= SWIPE_TIME && this.moveY >= MIN_VERTICAL_DISTANCE
+                || timeDiff > SWIPE_TIME && this.moveY >= MIN_VERTICAL_DISTANCE2) {
                 this.$emit('swipe-down-end');
             }
             // 恢复大图

@@ -5,8 +5,9 @@
 
 ## 介绍
 - 通过配置`data`里的`list`数据绑定图片信息来实现点击从图片区域展开大图，并且左右滑动可按照顺序来切换图片
-- 用户可以配置`slot`为`toolbar`的元素来自定义工具栏
+- 用户可以配置`slot`来展示信息栏、页码、自定义等相关信息
 - 通过`beforeViewerEnter` 与`beforeViewerLeave` 回调函数来指定展开收回的图片位置
+- 通过配置`closeIconURL` `closeIconSize` 来设置图片浏览器的关闭按钮的地址和大小
 
 ## 代码
 
