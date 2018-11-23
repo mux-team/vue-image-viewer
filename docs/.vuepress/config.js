@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/imageviewer/',
+    base: '/vue-image-viewer/',
     title: '移动图片放大浏览器',
     description: '移动图片放大浏览器',
     head: [

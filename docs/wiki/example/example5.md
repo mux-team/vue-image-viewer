@@ -1,10 +1,14 @@
 # 缩略图裁剪
 
 ## 示例效果
-![An image](./img/example5.gif)
-
-## 体验二维码
-![An image](./img/example5.png)
+<div style="margin-top: 30px">
+    <span style="display: inline-block;vertical-align:middle">
+        <img src="./img/example5.gif">
+    </span>
+    <span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
+        <img src="./img/example5.png">
+    </span>
+</div>
 
 ## 介绍
 - 缩略图，点击图片从缩略图展开

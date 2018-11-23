@@ -1,10 +1,14 @@
 # 自定义图片切换时间
 
 ## 示例效果
-![An image](./img/example4.gif)
-
-## 体验二维码
-![An image](./img/example4.png)
+<div style="margin-top: 30px">
+    <span style="display: inline-block;vertical-align:middle">
+        <img src="./img/example4.gif">
+    </span>
+    <span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
+        <img src="./img/example4.png">
+    </span>
+</div>
 
 ## 介绍
 - 可以通过设置`easySwipe`为`true`，实现滑动部分即可滑动页面不回弹；

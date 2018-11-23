@@ -1,10 +1,14 @@
 # 长图模式
 
 ## 示例效果
-![An image](./img/example3.gif)
-
-## 体验二维码
-![An image](./img/example3.png)
+<div style="margin-top: 30px">
+    <span style="display: inline-block;vertical-align:middle">
+        <img src="./img/example3.gif">
+    </span>
+    <span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
+        <img src="./img/example3.png">
+    </span>
+</div>
 
 ## 介绍
 - 通过设置`data`中`list`字段的`width` 和`height` 为实际图片宽高，图片展开后会默认

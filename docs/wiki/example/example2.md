@@ -1,9 +1,14 @@
 # 第二屏上拉展示
 
 ## 示例效果
-![An image](./img/example2.gif)
-## 体验二维码
-![An image](./img/example2.png)
+<div style="margin-top: 30px">
+    <span style="display: inline-block;vertical-align:middle">
+        <img src="./img/example2.gif">
+    </span>
+    <span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
+        <img src="./img/example2.png">
+    </span>
+</div>
 
 ## 介绍
 - 通过配置`slot`为`secondScreen` 的模板来配置上拉出现的第二屏
