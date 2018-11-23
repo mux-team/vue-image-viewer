@@ -3,7 +3,7 @@
 ## 示例效果
 <div style="margin-top: 30px">
     <span style="display: inline-block;vertical-align:middle">
-        <img src="./img/example3.gif">
+        <img src="./img/example_s3.gif">
     </span>
     <span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
         <img src="./img/example3.png">

@@ -2,7 +2,7 @@
     <div id="index">
         <div class="main">
             <div class="example">
-                <img src="./img/example1.gif">
+                <img src="./img/example_s1.gif">
             </div>
             <div class="desc">
                 <h1>vue-image-viewer</h1>
@@ -36,19 +36,19 @@ $borderColor = #eaecef
     min-height 600px
 
     .main
-        width 900px
+        width 750px
         margin 40px auto
         display flex
 
     .example
         text-align center
-        width 350px
+        width 275px
 
     h1
         font-size 42px
         font-weight 400
         color #32495f
-        margin 120px auto 30px
+        margin 50px auto 30px
         text-align center
 
     h2
@@ -64,7 +64,7 @@ $borderColor = #eaecef
 
     .desc
         flex 1
-        margin-left 80px
+        margin-left 50px
         padding 100px 0
         text-align center
 
