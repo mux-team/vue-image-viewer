@@ -1,6 +1,6 @@
 <template>
     <div class="example-container">
-        <h1>上滑出现第二屏</h1>
+        <h1>自定义切换时间</h1>
         <div class="img-container">
             <div class="img-left">
                 <div class="img-wrapper" @click="onImgClick(0)">
@@ -21,56 +21,19 @@
         </div>
         <image-viewer
             v-if="showViewer"
-            ref="viewer"
             :list="list"
             :startIndex="showIndex"
-            :hideInfo="hideInfo"
-            :hideToolbar="hideToolbar"
+            :isSwipeFirstLeave="false"
+            :easySwipe="easySwipe"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"
             @switch="onViewerSwitch"
-            @secondscreenshow="onSecondScreenShow"
-            @secondscreenhide="onSecondScreenHide"
         >
-
-            <!-- 自定义第二屏 -->
-            <template slot="secondScreen">
-                <div class="card">
-                    <div class="title">
-                        <div class="source">大众网</div>
-                    </div>
-                    <p>刘亦菲为什么不拍“宫斗戏”？网友：她一出场就大结局了！</p>
-                    <div class="desc">
-                        有些网友说：刘亦菲拍不了‘宫斗戏’，因为她一出场就大结局了！确实，要是真有这样一位美得动人心神的嫔妃，皇帝眼里怎么还能看得上其他人呢？这根本就不用进行‘宫斗’了，胜负立见分晓啊！就像“延禧”中的顺嫔一出场，所有人都顿时感觉到了威胁，人家根本就不需要出手，就能秒杀其他嫔妃。
-                    </div>
-                </div>
-                <div class="card">
-                <p>相关图片</p>
-                <div class="card-img">
-                    <ul>
-                        <li>
-                            <img src="https://f10.baidu.com/it/u=2513245929,1854010599&amp;fm=173&amp;app=49&amp;f=JPEG?w=640&amp;h=853&amp;s=EDBA2FD757C176F49618E06203006063&amp;access=215967316" data-index="4">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                        <li>
-                            <img src="https://f10.baidu.com/it/u=2915083872,1919598755&amp;fm=173&amp;app=49&amp;f=JPEG?w=450&amp;h=554&amp;s=70BB11D4CEB21094D48C589803005091&amp;access=215967316" data-index="3">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <img src="https://f11.baidu.com/it/u=1684286122,889766069&amp;fm=173&amp;app=49&amp;f=JPEG?w=640&amp;h=989&amp;s=38A1DE15C8B3501528B000D90300E016&amp;access=215967316" data-index="3">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                        <li>
-                            <img src="https://f12.baidu.com/it/u=399376856,4019825777&amp;fm=173&amp;app=49&amp;f=JPEG?w=640&amp;h=709&amp;s=7BCAA95719126FC2607085FB0300D032&amp;access=215967316" data-index="5">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                    </ul>
-                </div>
-                </div>
+            <template slot="toolbar">
+                <p style="position: relative; width: 100%; text-align: center; line-height: 40px;">自定义工具栏</p>
             </template>
+
         </image-viewer>
     </div>
 </template>
@@ -78,6 +41,9 @@
 import ImageViewer from 'components/ImageViewer';
 
 export default {
+    components: {
+        ImageViewer
+    },
     data() {
         return {
             list: [
@@ -108,12 +74,9 @@ export default {
             ],
             showIndex: 0,
             showViewer: false,
-            hideInfo: true,
-            hideToolbar: true
+            swipeDuration: 200,
+            easySwipe: false
         }
-    },
-    components: {
-        ImageViewer
     },
     methods: {
         onImgClick(i) {
@@ -141,21 +104,7 @@ export default {
             this.showViewer = false;
         },
         onViewerSwitch(obj) {
-        },
-        onSecondScreenShow(data) {
-            console.log('second screen show', data);
-        },
-        onSecondScreenHide(data) {
-            console.log('second screen hide', data);
-        },
-        onClick() {
-            this.$refs.viewer.showSecondScreen();
-        },
-        onChangeInfo() {
-            this.hideInfo = !this.hideInfo;
-        },
-        onChangePageNum() {
-            this.hidePageNum = !this.hidePageNum;
+            // 翻页逻辑
         }
     }
 }
@@ -163,47 +112,4 @@ export default {
 
 <style lang="stylus" scoped>
 @import './css/common';
-
-.card
-    padding 16px 16px 0
-    background-color #fff
-
-.card-img
-    display flex
-    justify-content space-between
-
-    ul
-        margin-top 10px
-        width 48% 
-
-    li
-        margin-bottom 10px
-
-        img     
-            width 100%
-        
-        .img-desc
-            color #999
-            font-size 12px
-            margin 3px 0 10px
-.title 
-    margin-bottom 10px
-
-.source
-    line-height 30px
-    border 1px solid #ddd
-    display inline
-    height 30px
-    padding 5px 10px
-    border-radius 20px
-
-p
-    line-height 20px
-    font-weight 700
-    margin 3px 0 5px
-    
-.desc   
-    color #777
-    font-size 13px
-    line-height 18px
 </style>

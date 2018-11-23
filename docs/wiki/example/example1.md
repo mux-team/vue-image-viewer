@@ -1,6 +1,31 @@
+# 全屏展示
+
+## 示例效果
+<div style="margin-top: 30px">
+<span style="display: inline-block;vertical-align:middle">
+    <img src="./img/example1.gif">
+</span>
+<span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
+    <img src="./img/example1.png">
+</span>
+</div>
+
+
+## 介绍
+- 通过配置`data`里的`list`数据绑定图片信息来实现点击从图片区域展开大图，并且左右滑动可按照顺序来切换图片
+- 用户可以配置`slot`来展示信息栏、页码、自定义等相关信息
+- 通过`beforeViewerEnter` 与`beforeViewerLeave` 回调函数来指定展开收回的图片位置
+- 通过配置`closeIconURL` `closeIconSize` 来设置图片浏览器的关闭按钮的地址和大小
+
+## 代码
+
+
+
+### 模板
+```html
 <template>
     <div class="example-container">
-        <h1>上滑出现第二屏</h1>
+        <h1>全屏展示</h1>
         <div class="img-container">
             <div class="img-left">
                 <div class="img-wrapper" @click="onImgClick(0)">
@@ -24,8 +49,6 @@
             ref="viewer"
             :list="list"
             :startIndex="showIndex"
-            :hideInfo="hideInfo"
-            :hideToolbar="hideToolbar"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"
@@ -33,51 +56,28 @@
             @secondscreenshow="onSecondScreenShow"
             @secondscreenhide="onSecondScreenHide"
         >
-
-            <!-- 自定义第二屏 -->
-            <template slot="secondScreen">
-                <div class="card">
-                    <div class="title">
-                        <div class="source">大众网</div>
-                    </div>
-                    <p>刘亦菲为什么不拍“宫斗戏”？网友：她一出场就大结局了！</p>
-                    <div class="desc">
-                        有些网友说：刘亦菲拍不了‘宫斗戏’，因为她一出场就大结局了！确实，要是真有这样一位美得动人心神的嫔妃，皇帝眼里怎么还能看得上其他人呢？这根本就不用进行‘宫斗’了，胜负立见分晓啊！就像“延禧”中的顺嫔一出场，所有人都顿时感觉到了威胁，人家根本就不需要出手，就能秒杀其他嫔妃。
-                    </div>
-                </div>
-                <div class="card">
-                <p>相关图片</p>
-                <div class="card-img">
-                    <ul>
-                        <li>
-                            <img src="https://f10.baidu.com/it/u=2513245929,1854010599&amp;fm=173&amp;app=49&amp;f=JPEG?w=640&amp;h=853&amp;s=EDBA2FD757C176F49618E06203006063&amp;access=215967316" data-index="4">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                        <li>
-                            <img src="https://f10.baidu.com/it/u=2915083872,1919598755&amp;fm=173&amp;app=49&amp;f=JPEG?w=450&amp;h=554&amp;s=70BB11D4CEB21094D48C589803005091&amp;access=215967316" data-index="3">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <img src="https://f11.baidu.com/it/u=1684286122,889766069&amp;fm=173&amp;app=49&amp;f=JPEG?w=640&amp;h=989&amp;s=38A1DE15C8B3501528B000D90300E016&amp;access=215967316" data-index="3">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                        <li>
-                            <img src="https://f12.baidu.com/it/u=399376856,4019825777&amp;fm=173&amp;app=49&amp;f=JPEG?w=640&amp;h=709&amp;s=7BCAA95719126FC2607085FB0300D032&amp;access=215967316" data-index="5">
-                            <div class="img-desc">刘亦菲旗袍装扮</div>
-                        </li>
-                    </ul>
-                </div>
+            <!-- 自定义工具栏 -->
+            <template slot="toolbar">
+                <div style="position: absolute; bottom: 0; width: 100%; height: 40px;">
+                    <p style="margin: 0;position: absolute; right:17px; bottom:9px; line-height: 24px; font-size: 14px;" @click="onClick">
+                        查看详情
+                    </p>
                 </div>
             </template>
         </image-viewer>
     </div>
 </template>
-<script>
-import ImageViewer from 'components/ImageViewer';
+```
+
+### 配置数据和回调函数
+
+```javascript
+import ImageViewer from 'mux-vue-image-viewer';
 
 export default {
+    components: {
+        ImageViewer
+    },
     data() {
         return {
             list: [
@@ -107,13 +107,8 @@ export default {
                 }
             ],
             showIndex: 0,
-            showViewer: false,
-            hideInfo: true,
-            hideToolbar: true
+            showViewer: false
         }
-    },
-    components: {
-        ImageViewer
     },
     methods: {
         onImgClick(i) {
@@ -141,69 +136,35 @@ export default {
             this.showViewer = false;
         },
         onViewerSwitch(obj) {
-        },
-        onSecondScreenShow(data) {
-            console.log('second screen show', data);
-        },
-        onSecondScreenHide(data) {
-            console.log('second screen hide', data);
-        },
-        onClick() {
-            this.$refs.viewer.showSecondScreen();
-        },
-        onChangeInfo() {
-            this.hideInfo = !this.hideInfo;
-        },
-        onChangePageNum() {
-            this.hidePageNum = !this.hidePageNum;
         }
     }
 }
-</script>
+```
 
-<style lang="stylus" scoped>
-@import './css/common';
+### 样式
+``` stylus
+.example-container
+    padding 10px
 
-.card
-    padding 16px 16px 0
-    background-color #fff
-
-.card-img
-    display flex
-    justify-content space-between
-
-    ul
-        margin-top 10px
-        width 48% 
-
-    li
+    h1
+        font-size 16px
         margin-bottom 10px
 
-        img     
-            width 100%
-        
-        .img-desc
-            color #999
-            font-size 12px
-            margin 3px 0 10px
-.title 
-    margin-bottom 10px
+.img-container
+    display flex
 
-.source
-    line-height 30px
-    border 1px solid #ddd
-    display inline
-    height 30px
-    padding 5px 10px
-    border-radius 20px
+    .img-wrapper
+        margin-bottom 8px
 
-p
-    line-height 20px
-    font-weight 700
-    margin 3px 0 5px
-    
-.desc   
-    color #777
-    font-size 13px
-    line-height 18px
-</style>
+    .img-left
+        width 49%
+        margin-right 8px
+
+    .img-right
+        flex 1
+
+.img-wrapper
+    img
+        display block
+        width 100%
+```

@@ -1,7 +1,5 @@
 # 指导
 
-## 安装
-
 ### NPM
 推荐使用这种方式引入组件
 ```sh
@@ -17,7 +15,7 @@ npm install mux-vue-image-viewer
 ### 下载
 <a href="https://raw.githubusercontent.com/mux-team/vue-image-viewer/master/dist/mux-vue-image-viewer.js">download</a>
 
-## 引入
+### 引入
 您可以以组件的形式引入
 ``` html
 <template>

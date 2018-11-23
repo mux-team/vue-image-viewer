@@ -1,47 +1,50 @@
 <template>
-    <div class="example-container">
-        <h1>全屏展示</h1>
-        <div class="img-container">
-            <div class="img-left">
-                <div class="img-wrapper" @click="onImgClick(0)">
-                    <img :src="list[0].src">
+    <div id="index">
+        <div class="example-container">
+            <h1>全屏展示</h1>
+            <div class="img-container">
+                <div class="img-left">
+                    <div class="img-wrapper" @click="onImgClick(0)">
+                        <img :src="list[0].src">
+                    </div>
+                    <div class="img-wrapper" @click="onImgClick(1)">
+                        <img :src="list[1].src">
+                    </div>
                 </div>
-                <div class="img-wrapper" @click="onImgClick(1)">
-                    <img :src="list[1].src">
+                <div class="img-right">
+                    <div class="img-wrapper" @click="onImgClick(2)">
+                        <img :src="list[2].src">
+                    </div>
+                    <div class="img-wrapper c-gap-top" @click="onImgClick(3)">
+                        <img :src="list[3].src">
+                    </div>
                 </div>
             </div>
-            <div class="img-right">
-                <div class="img-wrapper" @click="onImgClick(2)">
-                    <img :src="list[2].src">
-                </div>
-                <div class="img-wrapper c-gap-top" @click="onImgClick(3)">
-                    <img :src="list[3].src">
-                </div>
-            </div>
+            <image-viewer
+                v-if="showViewer"
+                ref="viewer"
+                :list="list"
+                :startIndex="showIndex"
+                @enterstart="beforeViewerEnter"
+                @leavestart="beforeViewerLeave"
+                @leave="onViewerLeave"
+                @switch="onViewerSwitch"
+            >
+                <!-- 自定义工具栏 -->
+                <template slot="toolbar">
+                    <div style="position: absolute; bottom: 0; width: 100%; height: .42rem;">
+                        <p style="margin: 0;position: absolute; right:17px; bottom:9px; line-height: 24px; font-size: 14px;" @click="onClick">
+                            查看详情
+                        </p>
+                    </div>
+                </template>
+            </image-viewer>
         </div>
-        <image-viewer
-            v-if="showViewer"
-            ref="viewer"
-            :list="list"
-            :startIndex="showIndex"
-            @enterstart="beforeViewerEnter"
-            @leavestart="beforeViewerLeave"
-            @leave="onViewerLeave"
-            @switch="onViewerSwitch"
-        >
-            <!-- 自定义工具栏 -->
-            <template slot="toolbar">
-                <div style="position: absolute; bottom: 0; width: 100%; height: .42rem;">
-                    <p style="margin: 0;position: absolute; right:17px; bottom:9px; line-height: 24px; font-size: 14px;" @click="onClick">
-                        查看详情
-                    </p>
-                </div>
-            </template>
-        </image-viewer>
     </div>
 </template>
+
 <script>
-import ImageViewer from 'components/ImageViewer';
+import ImageViewer from '../../../src/components/ImageViewer';
 
 export default {
     components: {
@@ -113,6 +116,70 @@ export default {
 }
 </script>
 
+
 <style lang="stylus" scoped>
-@import './css/common';
+$accentColor = #38f
+$borderColor = #eaecef
+
+#index
+    background-color #fafafa
+    overflow hidden
+    min-height 600px
+
+    .main
+        width 800px
+        margin 40px auto
+        display flex
+
+    .example
+        text-align center
+        width 308px
+
+    h1
+        font-size 32px
+        color #32495f
+        margin 70px auto 20px
+        text-align center
+
+    h2
+        font-size 20px
+        color #6889a9
+        border none
+        margin 20px 0 0
+
+    p
+        font-size 12px
+        color #6889a9
+        margin 0
+
+    .desc
+        flex 1
+        margin-left 30px
+        padding 100px 0
+        text-align center
+
+        .opt-wrapper
+            margin 40px 0
+
+        .card-btn
+            color #fff
+            background linear-gradient(30deg,#3f5b77,#51779b)
+            padding 16px 48px
+            font-size 20px
+            border none
+            cursor pointer
+            line-height 24px
+            margin-right 10px
+
+            &.white
+                background #fff
+                color #32495f
+
+    footer
+        margin 0 auto 40px
+        text-align center
+        color #999
+
+
+
 </style>

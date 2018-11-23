@@ -1,3 +1,20 @@
+# 第二屏上拉展示
+
+## 示例效果
+![An image](./img/example2.gif)
+## 体验二维码
+![An image](./img/example2.png)
+
+## 介绍
+- 通过配置`slot`为`secondScreen` 的模板来配置上拉出现的第二屏
+- 可以通过配置`data`中的`hideInfo`与`hideToolbar`隐藏页码和图片信息
+- 配置`onSecondScreenShow`与`onSecondScreenHide`回调函数来绑定出现第二屏的回调函数
+
+
+## 代码
+
+### 模板
+```html
 <template>
     <div class="example-container">
         <h1>上滑出现第二屏</h1>
@@ -74,10 +91,17 @@
         </image-viewer>
     </div>
 </template>
-<script>
-import ImageViewer from 'components/ImageViewer';
+```
+
+### 配置数据和回调函数
+
+```javascript
+import ImageViewer from 'mux-vue-image-viewer';
 
 export default {
+    components: {
+        ImageViewer
+    },
     data() {
         return {
             list: [
@@ -107,13 +131,8 @@ export default {
                 }
             ],
             showIndex: 0,
-            showViewer: false,
-            hideInfo: true,
-            hideToolbar: true
+            showViewer: false
         }
-    },
-    components: {
-        ImageViewer
     },
     methods: {
         onImgClick(i) {
@@ -141,28 +160,37 @@ export default {
             this.showViewer = false;
         },
         onViewerSwitch(obj) {
-        },
-        onSecondScreenShow(data) {
-            console.log('second screen show', data);
-        },
-        onSecondScreenHide(data) {
-            console.log('second screen hide', data);
-        },
-        onClick() {
-            this.$refs.viewer.showSecondScreen();
-        },
-        onChangeInfo() {
-            this.hideInfo = !this.hideInfo;
-        },
-        onChangePageNum() {
-            this.hidePageNum = !this.hidePageNum;
         }
     }
 }
-</script>
+```
 
-<style lang="stylus" scoped>
-@import './css/common';
+### 样式
+``` stylus
+.example-container
+    padding 10px
+
+    h1
+        font-size 16px
+        margin-bottom 10px
+
+.img-container
+    display flex
+
+    .img-wrapper
+        margin-bottom 8px
+
+    .img-left
+        width 49%
+        margin-right 8px
+
+    .img-right
+        flex 1
+
+.img-wrapper
+    img
+        display block
+        width 100%
 
 .card
     padding 16px 16px 0
@@ -206,4 +234,4 @@ p
     color #777
     font-size 13px
     line-height 18px
-</style>
+```
