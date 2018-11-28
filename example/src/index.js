@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import Vue from 'vue';
-import App from './app5';
+import App from './app1';
 
 Vue.config.productionTip = false;
 

@@ -19,7 +19,7 @@
 ## 代码
 
 ### 模板
-```html
+```html {38-73}
 <template>
     <div class="example-container">
         <h1>上滑出现第二屏</h1>
@@ -207,19 +207,19 @@ export default {
 
     ul
         margin-top 10px
-        width 48% 
+        width 48%
 
     li
         margin-bottom 10px
 
-        img     
+        img
             width 100%
-        
+
         .img-desc
             color #999
             font-size 12px
             margin 3px 0 10px
-.title 
+.title
     margin-bottom 10px
 
 .source
@@ -234,8 +234,8 @@ p
     line-height 20px
     font-weight 700
     margin 3px 0 5px
-    
-.desc   
+
+.desc
     color #777
     font-size 13px
     line-height 18px

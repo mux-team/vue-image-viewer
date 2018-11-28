@@ -40,6 +40,7 @@
                     :swipe-up-y="swipeUpY"
                     :has-second-screen="hasSecondScreen"
                     :is-second-screen-show="isSecondScreenShow"
+                    :image-clip-type="imageClipType"
                     @enter-start="onEnterStart"
                     @enter-end="onEnterEnd"
                     @leave-start="onLeaveStart"
@@ -127,6 +128,10 @@ export default {
         swipeDuration: {
             type: Number,
             default: 0
+        },
+        imageClipType: {
+            type: String,
+            default: 'none'
         }
     },
     data() {
@@ -454,6 +459,7 @@ export default {
         doSwitchAnimation() {
             let endPos = -this.dir * (window.innerWidth + ITEM_BORDER_WIDTH);
             let animateDuration = this.swipeDuration > 0 ? this.swipeDuration : AnimateConfig.duration.swipe;
+
             cssAnimate(this.$refs.content, {
                 transform: 'translate3d(' + endPos + 'px, 0, 0)'
             }, {
@@ -463,7 +469,16 @@ export default {
                 this.updateItemStyle();
                 this.resetMoveData();
                 this.isAnimating = false;
+                // 修复偶现的不归位bug，强制回到原位
+                if (+endPos === 0) {
+                    // 直接更新样式
+                    util.setCss(this.$refs.content, {
+                        transform: 'none'
+                    });
+                }
             });
+
+
         },
         updateItemStyle() {
             if (this.dir === 0) {
@@ -822,7 +837,6 @@ export default {
     .image-viewer-content
         position relative
         height 100%
-
 
     .image-viewer-content-bg
         position absolute

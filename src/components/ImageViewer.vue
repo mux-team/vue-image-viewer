@@ -25,6 +25,7 @@
             :swipe-up-height="swipeUpHeight"
             :easy-swipe="easySwipe"
             :swipe-duration="swipeDuration"
+            :image-clip-type="imageClipType"
             @enter-start="onEnterStart"
             @enter-end="onEnterEnd"
             @leave-start="onLeaveStart"
@@ -123,6 +124,17 @@ import util from '../common/util.js';
 import Store from '../common/store.js';
 import Link from '../common/link.js';
 
+ // 裁剪类型
+const ClipType = {
+    0: 'none',
+    1: 'none',
+    2: 'center',
+    3: 'top center'
+};
+
+// 其他剪裁类型
+const OTHER_CLIP = 0;
+
 export default {
     name: 'imageViewer',
     components: {
@@ -177,6 +189,10 @@ export default {
         },
         closeIconSize: {
             type: Number
+        },
+        imageClip: {
+            type: Number,
+            default: 0
         }
     },
     data() {
@@ -205,7 +221,8 @@ export default {
             resizeTimer: 0,
             bottomTimer: 0,
             leaveType: '',
-            isShowBg: true
+            isShowBg: true,
+            imageClipType: 'none'
         }
     },
     computed: {
@@ -220,6 +237,8 @@ export default {
         this.link = Link.create(this.list);
         this.state = this.getInitialState();
         this.emitEnterStartEvent();
+        // 判断图片裁剪方式
+        this.imageClipType = ClipType[this.imageClip] || ClipType[OTHER_CLIP];
     },
     mounted() {
         fastclick.attach(document.body);

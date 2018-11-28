@@ -81,8 +81,20 @@
                 :class="{hidden: !isReady}"
                 class="image-viewer-img"
             >
+                <div
+                    v-if="isShowLeaveImg"
+                    :style="{
+                        backgroundImage: 'url(' + imgSrc + ')'
+                    }"
+                    :class="{
+                        'bg-center': imageClipType === 'center',
+                        'bg-top-center': imageClipType === 'top center'
+                    }"
+                    class="bg"
+                >
+                </div>
                 <img
-                    v-if="imgSrc"
+                    v-else-if="imgSrc"
                     :src="imgSrc"
                     @error="onLoadError(imgSrc)"
                     @load="onLoadSuccess(imgSrc)"
@@ -102,8 +114,20 @@
                 v-if="!animationEnd"
                 class="image-viewer-img"
             >
+               <div
+                    v-if="isShowEnterImg && imgSrc"
+                    :style="{
+                        backgroundImage: 'url(' + imgSrc + ')'
+                    }"
+                    :class="{
+                        'bg-center': imageClipType === 'center',
+                        'bg-top-center': imageClipType === 'top center'
+                    }"
+                    class="bg"
+                >
+                </div>
                 <img
-                    v-if="imgSrc"
+                    a-else-if="imgSrc"
                     :src="imgSrc"
                 >
             </div>
@@ -116,6 +140,16 @@ import AnimateConfig from '../common/animate-config.js';
 import {scaleImage, layoutImage, cssAnimate, flip} from '../common/animate.js';
 import util from '../common/util.js';
 import ImageViewerLoading from './ImageViewerLoading';
+import ua from '../common/user-agent';
+import versionCompare from 'versions-compare';
+
+// 裁剪类型
+const ClipType = {
+    NONE: 'none',
+    CENTER: 'center',
+    TOP_CENTER: 'top center',
+    OTHER: 'other'
+};
 
 export default {
     components: {
@@ -177,6 +211,10 @@ export default {
         isSecondScreenShow: {
             type: Boolean,
             default: false
+        },
+        imageClipType: {
+            type: String,
+            default: 'none'
         }
     },
     data() {
@@ -185,9 +223,12 @@ export default {
             isError: false,
             isLongImage: false, // 是否展示为长图
             isSmallImage: false, // 是否展示为小图
+            isShowEnterImg: false,
+            isShowLeaveImg: false,
             imgPosition: {},
             imgStyle: {},
-            animationEnd: !(this.isCurrent && this.enterPosition.width > 0)
+            animationEnd: !(this.isCurrent && this.enterPosition.width > 0),
+            leaveDownGrade: false
         }
     },
     computed: {
@@ -198,6 +239,16 @@ export default {
         if (this.isCurrent && this.animationEnd) {
             this.$emit('enter-start');
         }
+
+        // IOS 8+，进场动画支持剪裁
+        if (this.imageClipType !== ClipType.NONE && this.imageClipType !== ClipType.OTHER
+            && ua.isIOS() && versionCompare(ua.iosVersion(), [8, 0]) >= 0) {
+            this.isShowEnterImg = true;
+        }
+
+        // 裁剪情况下, 安卓手百10.12以下退场降级
+        this.leaveDownGrade = this.imageClipType !== ClipType.NONE
+                && ua.isAndroid() && ua.isBaiduBox() && versionCompare(ua.baiduBoxVersion(), [10, 12]) < 0;
     },
     mounted() {
         this.resetImgPosition();
@@ -465,7 +516,8 @@ export default {
                 // flip 动画
                 flip(el, {left, top, width, height}, {
                     easing: 'ease-in-out',
-                    duration: AnimateConfig.duration.enter
+                    duration: AnimateConfig.duration.enter,
+                    isClip: this.isShowEnterImg
                 }).then(() => {
                     done();
                 });
@@ -506,7 +558,7 @@ export default {
             this.$emit('leave-start');
 
             // 有动画
-            if (this.leavePosition.width && this.isReady) {
+            if (this.leavePosition.width && this.isReady && !this.leaveDownGrade) {
                 util.setCss(el, {
                     position: 'fixed',
                     left: left + 'px',
@@ -515,6 +567,10 @@ export default {
                     height: height + 'px',
                     transform: 'none'
                 });
+
+                if (this.imageClipType !== ClipType.NONE && this.imageClipType !== ClipType.OTHER) {
+                    this.isShowLeaveImg = true;
+                }
             }
         },
         leave(el, done) {
@@ -524,12 +580,13 @@ export default {
             }
 
             // 有动画
-            if (this.leavePosition.width && this.isReady) {
+            if (this.leavePosition.width && this.isReady && !this.leaveDownGrade) {
                 const {left, top, width, height} = this.leavePosition;
                 // flip 动画
                 flip(el, {left, top, width, height}, {
                     duration: AnimateConfig.duration.leave,
-                    easing: 'ease-in-out'
+                    easing: 'ease-in-out',
+                    isClip: this.isShowLeaveImg
                 }).then(() => {
                     done();
                 });
@@ -638,6 +695,16 @@ export default {
 .hidden
     visibility hidden
 
+.bg
+    width 100%
+    height 100%
+    background-size cover
+
+.bg-center
+    background-position center
+
+.bg-top-center
+    background-position top center
 
 .image-viewer-img-loading,
 .image-viewer-img-error

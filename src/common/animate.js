@@ -90,14 +90,36 @@ export function flip(el, position, options) {
         'transform': 'none'
     });
 
-    const frames = [
-        {
-            transform: transformStr
-        },
-        {
-            transform: 'none'
-        }
-    ];
+    let frames;
+
+    // 图片有裁剪的情况
+    if (options && options.isClip) {
+        frames = [
+            {
+                left: left + 'px',
+                top: top + 'px',
+                width: width + 'px',
+                height: height + 'px'
+            },
+            {
+                left: newLeft + 'px',
+                top: newTop + 'px',
+                width: newWidth + 'px',
+                height: newHeight + 'px'
+            }
+        ];
+    }
+    else {
+        frames = [
+            {
+                transform: transformStr
+            },
+            {
+                transform: 'none'
+            }
+        ];
+    }
+
     options.easing = AnimateConfig.getEasingName(options.easing);
 
     return jsAnimate(el, frames, options);

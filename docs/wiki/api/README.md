@@ -14,6 +14,7 @@
 | swipeDuration	    |左右切换图片时间	|Number|	350	|否|
 | closeIconURL	    |关闭按钮的链接	    |String|	|	否|
 | closeIconSize	    |关闭按钮的大小	    |Number|	22|	否|
+| imageClip         | 缩略图裁剪方式，0: 其他裁剪，1: 无裁剪，2: 居中裁剪，3: 顶部居中裁剪。     |Number|0|否|
 
 ### list 数组里对象的详细字段：
 

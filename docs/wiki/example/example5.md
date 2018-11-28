@@ -16,7 +16,7 @@
 ## 代码
 
 ### 模板
-```html
+```html {22}
 <template>
     <div class="example-container">
         <h1>缩略图裁剪</h1>
@@ -38,6 +38,7 @@
             :startIndex="showIndex"
             :hideInfo="false"
             :hideToolbar="true"
+            :imageClip="3"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"

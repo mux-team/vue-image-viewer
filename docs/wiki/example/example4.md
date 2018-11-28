@@ -61,7 +61,7 @@
 
 ### 配置数据和回调函数
 
-```javascript
+```javascript {37-38}
 import ImageViewer from 'mux-vue-image-viewer';
 
 export default {

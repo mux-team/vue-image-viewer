@@ -39,6 +39,7 @@
                 :swipe-up-y="swipeUpY"
                 :has-second-screen="hasSecondScreen"
                 :is-second-screen-show="isSecondScreenShow"
+                :image-clip-type="imageClipType"
                 @enter-start="onEnterStart"
                 @enter-end="onEnterEnd"
                 @leave-start="onLeaveStart"
@@ -136,6 +137,10 @@ export default {
         isSecondScreenShow: {
             type: Boolean,
             default: false
+        },
+        imageClipType: {
+            type: String,
+            default: 'none'
         }
     },
     data() {

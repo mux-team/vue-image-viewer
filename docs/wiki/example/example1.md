@@ -118,6 +118,7 @@ export default {
         beforeViewerEnter(obj, animate) {
             if (typeof animate === 'function') {
                 let startEl = document.querySelectorAll('.img-wrapper')[obj.index];
+                // 展开动画
                 animate(startEl);
             }
         },
@@ -127,7 +128,7 @@ export default {
                 if (endEl) {
                     animate(endEl.getBoundingClientRect());
 
-                    // 下面方式也可
+                    // 归位动画 下面方式也可
                     animate(endEl);
                 }
             }

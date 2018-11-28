@@ -19,6 +19,7 @@
             :startIndex="showIndex"
             :hideInfo="false"
             :hideToolbar="true"
+            :imageClip="3"
             @enterstart="beforeViewerEnter"
             @leavestart="beforeViewerLeave"
             @leave="onViewerLeave"

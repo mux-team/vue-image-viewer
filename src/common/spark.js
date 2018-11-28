@@ -1,46 +1,39 @@
-/* eslint-disable */
-(function (window, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else {
-        window.Spark = factory();
-    }
-})(this, function () {
-    // 动画工具集
-    var Spark = {};
 
-    // Spark析构flag，析构时设置为true
-    Spark.disposed = false;
+// 动画工具集
+let Spark = {};
 
-    // Spark析构函数
-    Spark.dispose = function () {
-        Spark.disposed = true;
-    };
+// Spark析构flag，析构时设置为true
+Spark.disposed = false;
+
+// Spark析构函数
+Spark.dispose = function () {
+    Spark.disposed = true;
+};
 
 (function () {
     // 定义一批检测浏览器特性需要的变量
-    var prefix = '';
-    var eventPrefix;
-    var vendors = {
+    let prefix = '';
+    let eventPrefix;
+    let vendors = {
         Webkit: 'webkit',
         Moz: '',
         O: 'o'
     };
-    var testEl = document.createElement('div');
-    var supportedTransforms = /^((translate|rotate|scale)(X|Y|Z|3d)?|matrix(3d)?|perspective|skew(X|Y)?)$/i;
-    var isNaN = Number.isNaN || window.isNaN;
-    var transform;
-    var transitionProperty;
-    var transitionDuration;
-    var transitionTiming;
-    var transitionDelay;
-    var animationName;
-    var animationDuration;
-    var animationTiming;
-    var animationDelay;
-    var animationFillMode;
-    var transitionEnd;
-    var animationEnd;
+    let testEl = document.createElement('div');
+    let supportedTransforms = /^((translate|rotate|scale)(X|Y|Z|3d)?|matrix(3d)?|perspective|skew(X|Y)?)$/i;
+    let isNaN = Number.isNaN || window.isNaN;
+    let transform;
+    let transitionProperty;
+    let transitionDuration;
+    let transitionTiming;
+    let transitionDelay;
+    let animationName;
+    let animationDuration;
+    let animationTiming;
+    let animationDelay;
+    let animationFillMode;
+    let transitionEnd;
+    let animationEnd;
 
     function dasherize(str) {
         return str.replace(/([A-Z])/g, '-$1').toLowerCase();
@@ -52,7 +45,7 @@
 
     // 检测浏览器特性
     if (testEl.style.transform === undefined) {
-        for (var prop in vendors) {
+        for (let prop in vendors) {
             if (testEl.style[prop + 'TransitionProperty'] !== undefined) {
                 prefix = '-' + prop.toLowerCase() + '-';
                 eventPrefix = vendors[prop];
@@ -80,7 +73,7 @@
     animationEnd = normalizeEvent('AnimationEnd');
 
     // 动画完成后清空设置
-    var cssReset = {};
+    let cssReset = {};
     cssReset[transitionProperty] = '';
     cssReset[transitionDuration] = '';
     cssReset[transitionDelay] = '';
@@ -91,7 +84,7 @@
     cssReset[animationTiming] = '';
 
     // 是否不支持transition
-    var off = eventPrefix === undefined && testEl.style.transitionProperty === undefined;
+    let off = eventPrefix === undefined && testEl.style.transitionProperty === undefined;
 
     /**
      * 各种缓动函数
@@ -100,7 +93,7 @@
      *
      * @type {Object}
      */
-    var timing = {
+    let timing = {
         'linear': 'linear',
         'ease': 'ease',
         'ease-in': 'ease-in',
@@ -110,7 +103,7 @@
     };
 
     // 获取keyframes的动画名字的正则
-    var keyFrameReg = /^@(?:-webkit-)?keyframes\s+(?:['"])?(\w+)(?:['"])?\s*{/;
+    let keyFrameReg = /^@(?:-webkit-)?keyframes\s+(?:['"])?(\w+)(?:['"])?\s*{/;
 
     /**
      * 设置dom对象的css
@@ -121,7 +114,7 @@
      * @param {Object} obj 存放css信息的对象
      */
     function setCss(dom, obj) {
-        var css = '';
+        let css = '';
         Object.keys(obj).forEach(key => {
             if (!obj[key] && obj[key] !== 0) {
                 dom.style.removeProperty(dasherize(key));
@@ -193,8 +186,8 @@
             // 延迟时间默认为 0，单位ms
             delay = Number(delay) || 0;
 
-            var cssValues = {};
-            var endEvent;
+            let cssValues = {};
+            let endEvent;
 
             duration /= 1000;
             delay /= 1000;
@@ -202,11 +195,11 @@
             // keyframe动画
             if (typeof property === 'string') {
                 // 动画名称
-                var name;
+                let name;
                 if (keyFrameReg.test(property)) {
                     name = property.match(keyFrameReg)[1];
-                    var newName = name + '_' + Date.now();
-                    var styleTag = document.createElement('style');
+                    let newName = name + '_' + Date.now();
+                    let styleTag = document.createElement('style');
                     styleTag.innerText = property.replace(new RegExp(name, 'g'), newName);
                     document.head.appendChild(styleTag);
                     name = newName;
@@ -223,10 +216,10 @@
             }
             // transition动画
             else if (Object.prototype.toString.call(property) === '[object Object]') {
-                var cssProperty = [];
-                var transformCollection = '';
-                for (var key in property) {
-                    var value = property[key];
+                let cssProperty = [];
+                let transformCollection = '';
+                for (let key in property) {
+                    let value = property[key];
                     if (!isNaN(Number(value)) && needPx(key)) {
                         value += 'px';
                     }
@@ -252,10 +245,10 @@
             }
 
             // 回调是否执行
-            var fired = false;
+            let fired = false;
 
             // 包装后的回调函数
-            var wrappedCallback = function (event) {
+            let wrappedCallback = function (event) {
                 if (event && (event.elapsedTime !== (duration + delay))) {
                     return;
                 }
@@ -308,7 +301,7 @@
      * d: duration（持续时间）。
      * you can visit 'http://easings.net/zh-cn' to get effect
     */
-    var Tween = {
+    let Tween = {
         Linear: {
             easeIn: function(t, b, c, d) { return c*t/d + b; },
             easeOut: function(t, b, c, d) { return c*t/d + b; },
@@ -401,7 +394,7 @@
         },
         Elastic: {
             easeIn: function(t, b, c, d, a, p) {
-                var s;
+                let s;
                 if (t==0) return b;
                 if ((t /= d) == 1) return b + c;
                 if (typeof p == "undefined") p = d * .3;
@@ -414,7 +407,7 @@
                 return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
             },
             easeOut: function(t, b, c, d, a, p) {
-                var s;
+                let s;
                 if (t==0) return b;
                 if ((t /= d) == 1) return b + c;
                 if (typeof p == "undefined") p = d * .3;
@@ -427,7 +420,7 @@
                 return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b);
             },
             easeInOut: function(t, b, c, d, a, p) {
-                var s;
+                let s;
                 if (t==0) return b;
                 if ((t /= d / 2) == 2) return b+c;
                 if (typeof p == "undefined") p = d * (.3 * 1.5);
@@ -483,9 +476,9 @@
 
     // requestAnimationFrame polyfill
     (function() {
-        var lastTime = 0;
-        var vendors = ['webkit', 'moz'];
-        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        let lastTime = 0;
+        let vendors = ['webkit', 'moz'];
+        for(let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
             window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
             window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // Webkit中此取消方法的名字变了
                                           window[vendors[x] + 'CancelRequestAnimationFrame'];
@@ -493,9 +486,9 @@
 
         if (!window.requestAnimationFrame) {
             window.requestAnimationFrame = function(callback, element) {
-                var currTime = new Date().getTime();
-                var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
-                var id = window.setTimeout(function() {
+                let currTime = new Date().getTime();
+                let timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                let id = window.setTimeout(function() {
                     if (Spark.disposed) {
                         return;
                     }
@@ -527,13 +520,13 @@
      * @return {Undefined}
      */
     function _animate(dom, attr, origin, dest, unit, duration, easeFn, cb) {
-        var lastTime = Date.now();
-        var curTime;
-        var change = dest - origin;
+        let lastTime = Date.now();
+        let curTime;
+        let change = dest - origin;
         function _run() {
             curTime = Date.now();
-            var start = curTime - lastTime;
-            var pos = easeFn(start, origin, change, duration);
+            let start = curTime - lastTime;
+            let pos = easeFn(start, origin, change, duration);
             if (unit) {
                 pos += '' + unit;
             }
@@ -569,28 +562,28 @@
      */
     Spark.js = function (dom, property, duration, tween, ease, delay, cb) {
         Spark.disposed = false;
-        var easeFn = Tween[tween][ease];
-        var originProperty = dom.ownerDocument.defaultView.getComputedStyle(dom, null);
+        let easeFn = Tween[tween][ease];
+        let originProperty = dom.ownerDocument.defaultView.getComputedStyle(dom, null);
         if (!cb) {
             cb = delay;
             delay = 0;
         }
-        var reg = /^([+\-]=)?([\d+.\-]+)([a-z%]*)$/i;
+        let reg = /^([+\-]=)?([\d+.\-]+)([a-z%]*)$/i;
         setTimeout(function () {
             if (Spark.disposed) {
                 return;
             }
-            var n = 0;
-            for (var key in property) {
+            let n = 0;
+            for (let key in property) {
                 n++;
-                var origin = originProperty[key] || originProperty.getPropertyValue(key);
+                let origin = originProperty[key] || originProperty.getPropertyValue(key);
                 if (!origin && origin !== 0) {
                     origin = dom[key];
                 }
-                var parts = reg.exec(origin);
-                var unit = parts[3];
+                let parts = reg.exec(origin);
+                let unit = parts[3];
                 origin = parseFloat(parts[2]);
-                var dest = parseFloat(property[key]);
+                let dest = parseFloat(property[key]);
                 _animate(dom, key, origin, dest, unit, duration, easeFn, function () {
                     n--;
                     if (n <= 0) {
@@ -601,7 +594,6 @@
         }, delay);
     };
 })();
-;
 
-    return Spark;
-});
+export default Spark;
+
