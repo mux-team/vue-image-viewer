@@ -1,6 +1,6 @@
 {
   "name": "mux-vue-image-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "移动端图片浏览放大器",
   "main": "dist/mux-vue-image-viewer.js",
   "scripts": {
