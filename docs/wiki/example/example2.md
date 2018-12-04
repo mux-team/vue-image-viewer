@@ -6,7 +6,7 @@
         <img src="./img/example_s2.gif">
     </span>
     <span style="display: inline-block;vertical-align:middle; margin-left: 100px;">
-        <img src="./img/example2.png">
+        <img src="./img/2.png">
     </span>
 </div>
 
